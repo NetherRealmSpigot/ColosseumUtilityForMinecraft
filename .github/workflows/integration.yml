@@ -1,0 +1,20 @@
+name: Continuous publish
+on:
+  push:
+    branches:
+      - "master"
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: "NetherRealmSpigot/reusable-actions/Colosseum/Minecraft/utility@main"
+        with:
+          build-ref: ${{ github.ref }}
+          maven: ${{ secrets.COLOSSEUM_MAVEN }}
+          maven-username: ${{ secrets.COLOSSEUM_MAVEN_USERNAME }}
+          maven-password: ${{ secrets.COLOSSEUM_MAVEN_PASSWORD }}
